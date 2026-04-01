@@ -118,15 +118,30 @@
    sui client switch --env testnet
    ```
 
-2. **部署合約**
+2. **發布合約，取得 `PACKAGE_ID`**
    ```bash
    cd move
    sui client publish --gas-budget 100000000
    ```
+   從輸出的 `Published Objects` 中複製 `packageId`。
 
-3. **更新合約 ID**
+3. **建立停車場，取得 `LOT_ID`**
+   ```bash
+   sui client call \
+     --package <PACKAGE_ID> \
+     --module parking_rwa \
+     --function create_lot \
+     --gas-budget 10000000
+   ```
+   從輸出的 `Created Objects` 中複製 `ParkingLot` 的 Object ID。
 
-   將部署輸出的 `PACKAGE_ID` 和 `ParkingLot` 的 Object ID 填入 `frontend/src/constants/ids.ts`。
+4. **更新前端常數**
+
+   將上述兩個 ID 填入 `frontend/src/constants/ids.ts`：
+   ```ts
+   export const PACKAGE_ID = "0x...";
+   export const LOT_ID = "0x...";
+   ```
 
 ## 環境變數設定
 
