@@ -18,9 +18,8 @@ export default function PurchaseModal({ space, onClose, onSuccess }: Props) {
   const [txDigest, setTxDigest] = useState<string>("");
   const [success, setSuccess] = useState(false);
 
-  // IOTA 使用 nanoIOTA 作為最小單位 (1 IOTA = 1,000,000,000 nanoIOTA)
-  const formatIOTA = (nanoIOTA: number) => {
-    return (nanoIOTA / 1_000_000_000).toFixed(2);
+  const formatSUI = (mist: number) => {
+    return (mist / 1_000_000_000).toFixed(2);
   };
 
   const handlePurchase = async () => {
@@ -31,9 +30,7 @@ export default function PurchaseModal({ space, onClose, onSuccess }: Props) {
       const tx = createPurchaseSpaceTx(space.id, BigInt(space.price));
 
       signAndExecute(
-        {
-          transaction: tx,
-        },
+        { transaction: tx },
         {
           onSuccess: (result) => {
             console.log("購買成功:", result);
@@ -94,7 +91,7 @@ export default function PurchaseModal({ space, onClose, onSuccess }: Props) {
                   </div>
                   <div className="info-item">
                     <span className="label">時租費率:</span>
-                    <span className="value">{formatIOTA(space.hourlyRate)} IOTA/小時</span>
+                    <span className="value">{formatSUI(space.hourlyRate)} SUI/小時</span>
                   </div>
                   <div className="info-item">
                     <span className="label">當前持有者:</span>
@@ -107,8 +104,8 @@ export default function PurchaseModal({ space, onClose, onSuccess }: Props) {
                 <div className="price-section">
                   <h3>購買價格</h3>
                   <div className="price-display">
-                    <span className="price-amount">{formatIOTA(space.price)}</span>
-                    <span className="price-currency">IOTA</span>
+                    <span className="price-amount">{formatSUI(space.price)}</span>
+                    <span className="price-currency">SUI</span>
                   </div>
                 </div>
 
@@ -137,7 +134,7 @@ export default function PurchaseModal({ space, onClose, onSuccess }: Props) {
                   onClick={handlePurchase}
                   disabled={isPurchasing}
                 >
-                  {isPurchasing ? "購買中..." : `確認購買 ${formatIOTA(space.price)} IOTA`}
+                  {isPurchasing ? "購買中..." : `確認購買 ${formatSUI(space.price)} SUI`}
                 </button>
               </div>
             </>

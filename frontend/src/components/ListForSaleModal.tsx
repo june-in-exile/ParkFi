@@ -11,36 +11,32 @@ interface Props {
   onSuccess?: () => void;
 }
 
-// 1 IOTA = 1,000,000,000 nanoIOTA
-const NANO_IOTA_PER_IOTA = 1_000_000_000;
+const MIST_PER_SUI = 1_000_000_000;
 
 export default function ListForSaleModal({ space, onClose, onSuccess }: Props) {
   const { mutate: signAndExecute } = useSignAndExecuteTransaction();
   const [isListing, setIsListing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [priceIOTA, setPriceIOTA] = useState("");
+  const [priceSUI, setPriceSUI] = useState("");
   const [txDigest, setTxDigest] = useState<string>("");
   const [success, setSuccess] = useState(false);
 
   const handleListForSale = async () => {
-    if (!priceIOTA || parseFloat(priceIOTA) <= 0) {
+    if (!priceSUI || parseFloat(priceSUI) <= 0) {
       setError("請輸入有效的價格。");
       return;
     }
-    
-    // 將 IOTA 價格轉換為 nanoIOTA
-    const priceNanoIOTA = BigInt(Math.floor(parseFloat(priceIOTA) * NANO_IOTA_PER_IOTA));
+
+    const priceMIST = BigInt(Math.floor(parseFloat(priceSUI) * MIST_PER_SUI));
 
     setIsListing(true);
     setError(null);
 
     try {
-      const tx = createSetPriceTx(space.id, priceNanoIOTA);
+      const tx = createSetPriceTx(space.id, priceMIST);
 
       signAndExecute(
-        {
-          transaction: tx,
-        },
+        { transaction: tx },
         {
           onSuccess: (result) => {
             console.log("上架成功:", result);
@@ -96,18 +92,18 @@ export default function ListForSaleModal({ space, onClose, onSuccess }: Props) {
               </div>
 
               <div className="price-input-section">
-                <label htmlFor="price-input">設定售價 (IOTA)</label>
+                <label htmlFor="price-input">設定售價 (SUI)</label>
                 <div className="input-group">
-                    <input
+                  <input
                     id="price-input"
                     type="number"
-                    value={priceIOTA}
-                    onChange={(e) => setPriceIOTA(e.target.value)}
+                    value={priceSUI}
+                    onChange={(e) => setPriceSUI(e.target.value)}
                     placeholder="例如: 12.5"
                     min="0"
                     step="any"
-                    />
-                    <span>IOTA</span>
+                  />
+                  <span>SUI</span>
                 </div>
               </div>
 
@@ -128,7 +124,7 @@ export default function ListForSaleModal({ space, onClose, onSuccess }: Props) {
                 <button
                   className="btn-primary"
                   onClick={handleListForSale}
-                  disabled={isListing || !priceIOTA}
+                  disabled={isListing || !priceSUI}
                 >
                   {isListing ? "上架中..." : "確認上架"}
                 </button>

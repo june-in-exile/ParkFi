@@ -36,7 +36,7 @@ export default function MySpaces({ setActiveTab }: Props) {
           前往二級市場
         </button>
         <div className="benefits-box">
-          <h4>擁有停車格的好處：</h4>
+          <h4>擁有停車格的好處</h4>
           <ul>
             <li>🚗 當其他用戶租用時自動獲得收益分潤</li>
             <li>💰 可以自由買賣停車格 NFT 資產</li>
@@ -51,8 +51,8 @@ export default function MySpaces({ setActiveTab }: Props) {
   const totalValue = mySpaces.reduce((sum: number, space: ParkingSpace) => sum + (space.price > 0 ? space.price : 0), 0);
   const forSaleCount = mySpaces.filter((space: ParkingSpace) => space.price > 0).length;
 
-  const formatIOTA = (nanoIOTA: number) => {
-    return (nanoIOTA / 1_000_000_000).toFixed(2);
+  const formatSUI = (mist: number) => {
+    return (mist / 1_000_000_000).toFixed(2);
   };
 
   return (
@@ -64,13 +64,13 @@ export default function MySpaces({ setActiveTab }: Props) {
             <span className="stat-label">持有數量</span>
             <span className="stat-value">{mySpaces.length}</span>
           </div>
-          <div className="stat-card">
+          <div className="stat-card accent">
             <span className="stat-label">出售中</span>
             <span className="stat-value">{forSaleCount}</span>
           </div>
           <div className="stat-card">
             <span className="stat-label">標價總值</span>
-            <span className="stat-value">{formatIOTA(totalValue)} IOTA</span>
+            <span className="stat-value">{formatSUI(totalValue)} SUI</span>
           </div>
         </div>
       </div>

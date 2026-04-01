@@ -18,7 +18,7 @@ export default function PaymentModal({ space, onClose }: Props) {
 
   const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
-  const formatIOTA = (mist: number) => {
+  const formatSUI = (mist: number) => {
     return (mist / 1_000_000_000).toFixed(4);
   };
 
@@ -105,7 +105,7 @@ export default function PaymentModal({ space, onClose }: Props) {
                 <div className="cost-breakdown">
                   <div className="cost-row">
                     <span>時租費率:</span>
-                    <span>{formatIOTA(space.hourlyRate)} IOTA/小時</span>
+                    <span>{formatSUI(space.hourlyRate)} SUI/小時</span>
                   </div>
                   <div className="cost-row">
                     <span>停車時數:</span>
@@ -113,7 +113,7 @@ export default function PaymentModal({ space, onClose }: Props) {
                   </div>
                   <div className="cost-row total">
                     <span>總計:</span>
-                    <span className="total-amount">{formatIOTA(totalCost)} IOTA</span>
+                    <span className="total-amount">{formatSUI(totalCost)} SUI</span>
                   </div>
                 </div>
 

@@ -15,13 +15,18 @@ export default function ParkingApp() {
     return (
       <div className="app-container">
         <header className="app-header">
-          <h1>🅿️ Parking RWA on IOTA</h1>
-          <p>停車格資產化平台</p>
+          <div className="header-brand">
+            <h1>🅿️ Park<span className="accent">Fi</span></h1>
+            <span className="subtitle">停車格資產化平台 · Powered by Sui</span>
+          </div>
         </header>
-        <div className="connect-prompt">
-          <h2>歡迎使用停車格 RWA 平台</h2>
-          <p>請先連接您的 IOTA 錢包以開始使用</p>
-          <WalletConnect />
+        <div className="connect-screen">
+          <div className="connect-card">
+            <span className="logo">🅿️</span>
+            <h2>歡迎使用 ParkFi</h2>
+            <p>連接您的 Sui 錢包，開始投資停車格資產並獲取被動收益</p>
+            <WalletConnect />
+          </div>
         </div>
       </div>
     );
@@ -30,8 +35,9 @@ export default function ParkingApp() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <div>
-          <h1>🅿️ Parking RWA on IOTA</h1>
+        <div className="header-brand">
+          <h1>🅿️ Park<span className="accent">Fi</span></h1>
+          <span className="subtitle">停車格資產化平台 · Powered by Sui</span>
         </div>
         <WalletConnect />
       </header>

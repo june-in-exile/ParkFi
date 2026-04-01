@@ -19,7 +19,7 @@ export default function MintSpaceForm({ setActiveTab }: Props) {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [txDigest, setTxDigest] = useState<string>("");
 
-  const NANO_IOTA_PER_IOTA = 1_000_000_000;
+  const MIST_PER_SUI = 1_000_000_000;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,16 +51,13 @@ export default function MintSpaceForm({ setActiveTab }: Props) {
     setMessage(null);
 
     try {
-      // 將 IOTA 轉換為 nanoIOTA，並使用 BigInt
-      const hourlyRateNanoIOTA = BigInt(Math.floor(hourlyRateNum * NANO_IOTA_PER_IOTA));
-      const priceNanoIOTA = BigInt(Math.floor(priceNum * NANO_IOTA_PER_IOTA));
+      const hourlyRateMIST = BigInt(Math.floor(hourlyRateNum * MIST_PER_SUI));
+      const priceMIST = BigInt(Math.floor(priceNum * MIST_PER_SUI));
 
-      const tx = createMintSpaceTx(location, hourlyRateNanoIOTA, priceNanoIOTA);
+      const tx = createMintSpaceTx(location, hourlyRateMIST, priceMIST);
 
       signAndExecute(
-        {
-          transaction: tx,
-        },
+        { transaction: tx },
         {
           onSuccess: (result) => {
             console.log("鑄造成功:", result);
@@ -110,7 +107,7 @@ export default function MintSpaceForm({ setActiveTab }: Props) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="hourlyRate">時租費率 (IOTA/小時)</label>
+          <label htmlFor="hourlyRate">時租費率 (SUI/小時)</label>
           <input
             id="hourlyRate"
             type="number"
@@ -124,7 +121,7 @@ export default function MintSpaceForm({ setActiveTab }: Props) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="price">初始售價 (IOTA)</label>
+          <label htmlFor="price">初始售價 (SUI)</label>
           <input
             id="price"
             type="number"

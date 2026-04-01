@@ -17,9 +17,8 @@ export default function ParkingSpaceCard({ space, onPurchaseSuccess, setActiveTa
   const [showPurchase, setShowPurchase] = useState(false);
   const isOwner = currentAccount?.address === space.owner;
 
-  // IOTA 使用 nanoIOTA 作為最小單位 (1 IOTA = 1,000,000,000 nanoIOTA)
-  const formatIOTA = (nanoIOTA: number) => {
-    return (nanoIOTA / 1_000_000_000).toFixed(2);
+  const formatSUI = (mist: number) => {
+    return (mist / 1_000_000_000).toFixed(2);
   };
 
   return (
@@ -33,19 +32,19 @@ export default function ParkingSpaceCard({ space, onPurchaseSuccess, setActiveTa
 
         <div className="card-body">
           <div className="info-row">
-            <span className="label">時租費率:</span>
-            <span className="value">{formatIOTA(space.hourlyRate)} IOTA/小時</span>
+            <span className="label">時租費率</span>
+            <span className="value">{formatSUI(space.hourlyRate)} SUI/小時</span>
           </div>
 
           <div className="info-row">
-            <span className="label">車位 ID:</span>
+            <span className="label">車位 ID</span>
             <span className="value monospace">
               {space.id.slice(0, 8)}...{space.id.slice(-6)}
             </span>
           </div>
 
           <div className="info-row">
-            <span className="label">持有者:</span>
+            <span className="label">持有者</span>
             <span className="value monospace">
               {space.owner.slice(0, 8)}...{space.owner.slice(-6)}
             </span>
@@ -53,8 +52,8 @@ export default function ParkingSpaceCard({ space, onPurchaseSuccess, setActiveTa
 
           {space.price > 0 && (
             <div className="info-row sale-info">
-              <span className="label">售價:</span>
-              <span className="value price">{formatIOTA(space.price)} IOTA</span>
+              <span className="label">售價</span>
+              <span className="value price">{formatSUI(space.price)} SUI</span>
             </div>
           )}
         </div>

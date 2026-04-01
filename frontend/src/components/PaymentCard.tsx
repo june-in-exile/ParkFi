@@ -5,7 +5,7 @@ export function PaymentCard({ space }: { space: { id: string; hourlyRate: number
     const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
     const handlePay = () => {
-        const tx = createParkingPaymentTx(space.id, BigInt(space.hourlyRate), 1); // 預設 1 小時
+        const tx = createParkingPaymentTx(space.id, BigInt(space.hourlyRate), 1);
 
         signAndExecute(
             { transaction: tx as any },
@@ -16,5 +16,5 @@ export function PaymentCard({ space }: { space: { id: string; hourlyRate: number
         );
     };
 
-    return <button onClick={handlePay}>立即支付 IOTA</button>;
+    return <button onClick={handlePay}>立即支付 SUI</button>;
 }

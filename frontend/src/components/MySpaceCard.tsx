@@ -23,8 +23,8 @@ export default function MySpaceCard({ space, onActionSuccess }: Props) {
 
   const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
-  const formatIOTA = (nanoIOTA: number) => {
-    return (nanoIOTA / 1_000_000_000).toFixed(2);
+  const formatSUI = (mist: number) => {
+    return (mist / 1_000_000_000).toFixed(2);
   };
 
   const handleCancelListing = () => {
@@ -101,12 +101,12 @@ export default function MySpaceCard({ space, onActionSuccess }: Props) {
 
         <div className="card-body">
           <div className="info-row">
-            <span className="label">時租費率:</span>
-            <span className="value">{formatIOTA(space.hourlyRate)} IOTA/小時</span>
+            <span className="label">時租費率</span>
+            <span className="value">{formatSUI(space.hourlyRate)} SUI/小時</span>
           </div>
 
           <div className="info-row">
-            <span className="label">車位 ID:</span>
+            <span className="label">車位 ID</span>
             <span className="value monospace">
               {space.id.slice(0, 8)}...{space.id.slice(-6)}
             </span>
@@ -114,12 +114,12 @@ export default function MySpaceCard({ space, onActionSuccess }: Props) {
 
           {space.price > 0 ? (
             <div className="info-row sale-status">
-              <span className="label">出售價格:</span>
-              <span className="value price-tag">{formatIOTA(space.price)} IOTA</span>
+              <span className="label">出售價格</span>
+              <span className="value price-tag">{formatSUI(space.price)} SUI</span>
             </div>
           ) : (
             <div className="info-row">
-              <span className="label">狀態:</span>
+              <span className="label">狀態</span>
               <span className="value">未出售</span>
             </div>
           )}

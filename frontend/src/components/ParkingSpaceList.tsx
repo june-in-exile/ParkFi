@@ -33,10 +33,10 @@ export default function ParkingSpaceList({ setActiveTab }: ParkingSpaceListProps
         <h3>目前沒有可用的停車格</h3>
         <p>請確認合約已部署並且已經鑄造停車格 NFT</p>
         <div className="hint-box">
-          <h4>開發提示：</h4>
+          <h4>開發提示</h4>
           <ol>
-            <li>部署合約到 IOTA 測試網</li>
-            <li>更新 <code>.env</code> 中的 PACKAGE_ID 和 LOT_ID</li>
+            <li>部署合約到 Sui 測試網</li>
+            <li>更新 <code>constants/ids.ts</code> 中的 PACKAGE_ID 和 LOT_ID</li>
             <li>使用合約的 <code>mint_space</code> 函數鑄造停車格</li>
           </ol>
         </div>
