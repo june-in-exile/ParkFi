@@ -1,4 +1,4 @@
-import { Transaction } from "@iota/iota-sdk/transactions";
+import { Transaction } from "@mysten/sui/transactions";
 import { PACKAGE_ID, LOT_ID } from "../constants/ids";
 
 // 支付停車費

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSignAndExecuteTransaction } from "@iota/dapp-kit";
+import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
 import { ParkingSpace } from "../types/parking";
 import { createPurchaseSpaceTx } from "../contracts/parking";
 import { TransactionLink } from "./TransactionLink";

@@ -1,4 +1,4 @@
-import { ConnectButton, useCurrentAccount } from "@iota/dapp-kit";
+import { ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
 import "./WalletConnect.css";
 
 export default function WalletConnect() {

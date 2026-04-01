@@ -9,7 +9,7 @@ export function TransactionLink({
   network = 'testnet',
   className = ''
 }: TransactionLinkProps) {
-  const explorerUrl = `https://iotascan.com/${network}/tx/${digest}`;
+  const explorerUrl = `https://suiscan.xyz/${network}/tx/${digest}`;
 
   const shortDigest = digest.length > 32
     ? `${digest.slice(0, 16)}...${digest.slice(-16)}`

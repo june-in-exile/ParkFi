@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCurrentAccount } from "@iota/dapp-kit";
+import { useCurrentAccount } from "@mysten/dapp-kit";
 import { ParkingSpace } from "../types/parking";
 import PaymentModal from "./PaymentModal";
 import PurchaseModal from "./PurchaseModal";

@@ -1,4 +1,4 @@
-import { useSignAndExecuteTransaction } from "@iota/dapp-kit";
+import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
 import { createParkingPaymentTx } from "../contracts/parking";
 
 export function PaymentCard({ space }: { space: { id: string; hourlyRate: number } }) {

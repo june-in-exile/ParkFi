@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCurrentAccount } from "@iota/dapp-kit";
+import { useCurrentAccount } from "@mysten/dapp-kit";
 import WalletConnect from "./WalletConnect";
 import ParkingSpaceList from "./ParkingSpaceList";
 import MySpaces from "./MySpaces";

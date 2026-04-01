@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSignAndExecuteTransaction } from "@iota/dapp-kit";
+import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
 import { ParkingSpace } from "../types/parking";
 import { createSetPriceTx, createTransferSpaceTx } from "../contracts/parking";
 import ListForSaleModal from "./ListForSaleModal";
@@ -52,8 +52,8 @@ export default function MySpaceCard({ space, onActionSuccess }: Props) {
   };
 
   const handleTransfer = () => {
-    if (!addressInput || !addressInput.startsWith("iota")) {
-      setMessage("請輸入有效的 IOTA 地址");
+    if (!addressInput || !addressInput.startsWith("0x")) {
+      setMessage("請輸入有效的 Sui 地址");
       return;
     }
 
@@ -169,10 +169,10 @@ export default function MySpaceCard({ space, onActionSuccess }: Props) {
         {actionType === "transfer" && (
           <div className="action-panel">
             <h4>轉讓停車格</h4>
-            <p className="hint">請輸入接收者的 IOTA 地址</p>
+            <p className="hint">請輸入接收者的 Sui 地址</p>
             <input
               type="text"
-              placeholder="iota..."
+              placeholder="0x..."
               value={addressInput}
               onChange={(e) => setAddressInput(e.target.value)}
               disabled={isLoading}

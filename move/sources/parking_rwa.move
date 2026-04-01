@@ -1,11 +1,11 @@
 module parking_system::parking_rwa {
-    use iota::coin::{Self, Coin};
-    use iota::iota::IOTA;
-    use iota::balance::{Self, Balance};
-    use iota::event;
-    use iota::object::{Self, UID, ID};
-    use iota::tx_context::{Self, TxContext};
-    use iota::transfer;
+    use sui::coin::{Self, Coin};
+    use sui::sui::SUI;
+    use sui::balance::{Self, Balance};
+    use sui::event;
+    use sui::object::{Self, UID, ID};
+    use sui::tx_context::{Self, TxContext};
+    use sui::transfer;
     use std::string::String;
 
     /// 錯誤代碼
@@ -108,7 +108,7 @@ module parking_system::parking_rwa {
         lot: &ParkingLot,
         space: &mut ParkingSpace,
         hours: u64,
-        payment: Coin<IOTA>,
+        payment: Coin<SUI>,
         ctx: &mut TxContext
     ) {
         let total_required = space.hourly_rate * hours;
@@ -149,7 +149,7 @@ module parking_system::parking_rwa {
     /// 購買停車格
     public fun purchase_space(
         space: &mut ParkingSpace,
-        payment: Coin<IOTA>,
+        payment: Coin<SUI>,
         ctx: &mut TxContext
     ) {
         // 檢查是否在出售中

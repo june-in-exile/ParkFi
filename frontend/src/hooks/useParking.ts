@@ -1,4 +1,4 @@
-import { useIotaClient, useCurrentAccount } from "@iota/dapp-kit";
+import { useSuiClient, useCurrentAccount } from "@mysten/dapp-kit";
 import { useQuery } from "@tanstack/react-query";
 import { ParkingSpace } from "../types/parking";
 import { PACKAGE_ID } from "../constants/ids";
@@ -26,7 +26,7 @@ function parseParkingSpace(obj: any): ParkingSpace | null {
 
 // 獲取所有停車格（從所有用戶中查詢）
 export function useAllParkingSpaces() {
-    const client = useIotaClient();
+    const client = useSuiClient();
 
     return useQuery({
         queryKey: ["parkingSpaces", "all"],
@@ -137,7 +137,7 @@ export function useMyParkingSpaces() {
 
 // 獲取單個停車格詳情
 export function useParkingSpace(spaceId: string | undefined) {
-    const client = useIotaClient();
+    const client = useSuiClient();
 
     return useQuery({
         queryKey: ["parkingSpace", spaceId],

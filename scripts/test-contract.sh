@@ -50,7 +50,7 @@ echo ""
 echo "1️⃣ [Operator] 創建停車場 (ParkingLot)..."
 echo "--------------------------------------------"
 
-CREATE_LOT_OUTPUT=$(iota client call \
+CREATE_LOT_OUTPUT=$(sui client call \
     --package "$PACKAGE_ID" \
     --module parking_rwa \
     --function create_lot \
@@ -92,11 +92,11 @@ echo "2️⃣ [Operator] 鑄造停車格 NFT（位置：A1，售價：10 IOTA）
 echo "--------------------------------------------"
 echo "說明："
 echo "  - 停車格位置: A1"
-echo "  - 每小時停車費: 1 IOTA (1,000,000,000 Nano IOTA)"
-echo "  - 初始售價: 10 IOTA (10,000,000,000 Nano IOTA)"
+echo "  - 每小時停車費: 1 IOTA (1,000,000,000 MIST)"
+echo "  - 初始售價: 10 IOTA (10,000,000,000 MIST)"
 echo ""
 
-MINT_OUTPUT=$(iota client call \
+MINT_OUTPUT=$(sui client call \
     --package "$PACKAGE_ID" \
     --module parking_rwa \
     --function mint_space \
@@ -145,7 +145,7 @@ echo ""
 
 echo "⚠️  請切換到 Alice 的錢包執行以下命令："
 echo ""
-echo "iota client ptb \\"
+echo "sui client ptb \\"
 echo "  --split-coins gas '[10000000000]' \\"
 echo "  --assign payment \\"
 echo "  --move-call $PACKAGE_ID::parking_rwa::purchase_space @$SPACE_ID payment \\"
@@ -167,7 +167,7 @@ echo ""
 
 echo "⚠️  請切換到 Bob 的錢包執行以下命令："
 echo ""
-echo "iota client ptb \\"
+echo "sui client ptb \\"
 echo "  --split-coins gas '[2000000000]' \\"
 echo "  --assign payment \\"
 echo "  --move-call $PACKAGE_ID::parking_rwa::pay_for_parking @$LOT_ID @$SPACE_ID 2 payment \\"
@@ -181,7 +181,7 @@ echo ""
 # ============================================
 echo "5️⃣ 查詢停車格當前狀態..."
 echo "--------------------------------------------"
-iota client object "$SPACE_ID"
+sui client object "$SPACE_ID"
 echo ""
 
 # ============================================

@@ -1,6 +1,6 @@
-# Parking RWA on IOTA
+# Parking RWA on Sui
 
-這是一個基於 IOTA 網絡構建的停車位 RWA (Real World Asset) 專案。本專案利用 IOTA SDK 與 dApp Kit 進行開發。
+這是一個基於 Sui 網絡構建的停車位 RWA (Real World Asset) 專案。本專案利用 Sui SDK 與 dApp Kit 進行開發。
 
 ## 🎯 專案簡介
 
@@ -39,27 +39,27 @@
    - 設定分潤比例（80% 營運商 / 20% 持有者）
 
 2. **Operator 鑄造停車格 NFT**
-   - 調用 `mint_space(lot, "A1", 1 IOTA/hr, 10 IOTA)`
+   - 調用 `mint_space(lot, "A1", 1 SUI/hr, 10 SUI)`
    - 設定停車費率和售價
 
 3. **投資者購買停車格**
    - 調用 `purchase_space(space_A1)`
-   - 支付購買價格（如 10 IOTA）
+   - 支付購買價格（如 10 SUI）
    - 獲得停車格 NFT 所有權
 
 ### 第二階段：營運與收益
 
 4. **駕駛人支付停車費**
    - 調用 `pay_for_parking(lot, space_A1, 2)` 停車 2 小時
-   - 支付停車費（如 2 IOTA）
+   - 支付停車費（如 2 SUI）
    - 自動分潤：
-     - 80% (1.6 IOTA) → Operator
-     - 20% (0.4 IOTA) → 停車格持有者
+     - 80% (1.6 SUI) → Operator
+     - 20% (0.4 SUI) → 停車格持有者
 
 ### 第三階段：二級市場交易（可選）
 
 5. **持有者出售停車格**
-   - 調用 `set_price(space_A1, 15 IOTA)` 設定售價
+   - 調用 `set_price(space_A1, 15 SUI)` 設定售價
    - 新買家購買後獲得所有權
    - 新買家開始獲得 20% 停車費分潤
 
@@ -68,21 +68,21 @@
 ### 場景：停車格 A1
 
 **初始設定**:
-- 售價: 10 IOTA
-- 每小時停車費: 1 IOTA
+- 售價: 10 SUI
+- 每小時停車費: 1 SUI
 - 分潤比例: Operator 80% / 持有者 20%
 
 ### 投資者收益
 
 | 階段 | 收入/支出 | 金額 | 累計收益 |
 |------|----------|------|---------:|
-| 購買階段 | 購買停車格 | -10 IOTA | -10 IOTA |
-| 第 1 次停車 | 停 2 小時（20%） | +0.4 IOTA | -9.6 IOTA |
-| 第 2 次停車 | 停 3 小時（20%） | +0.6 IOTA | -9 IOTA |
-| 第 10 次停車 | 累計約停 25 小時 | +5 IOTA | **回本** |
+| 購買階段 | 購買停車格 | -10 SUI | -10 SUI |
+| 第 1 次停車 | 停 2 小時（20%） | +0.4 SUI | -9.6 SUI |
+| 第 2 次停車 | 停 3 小時（20%） | +0.6 SUI | -9 SUI |
+| 第 10 次停車 | 累計約停 25 小時 | +5 SUI | **回本** |
 | 持續營運 | 持續獲得 20% 分潤 | ... | 持續獲利 |
 
-**回本週期**: 約需累計停車 50 小時（假設每小時 1 IOTA）
+**回本週期**: 約需累計停車 50 小時（假設每小時 1 SUI）
 
 ## 🔐 安全保障
 
@@ -96,23 +96,45 @@
 
 - **Node.js**: 建議使用 v18 或更高版本。
 - **套件管理器**: npm, yarn 或 pnpm。
+- **Sui CLI**: 用於部署合約，安裝說明請參考 [Sui 官方文件](https://docs.sui.io/guides/developer/getting-started/sui-install)。
 
 ## 安裝說明
 
 1. **克隆專案**
    ```bash
    git clone <repository-url>
-   cd "Parking RWA on IOTA"
+   cd parking-rwa-on-iota
    ```
 
-2. **安裝依賴套件**
+2. **安裝前端依賴**
    ```bash
-   npm install
+   cd frontend && npm install
    ```
+
+## 合約部署
+
+1. **切換至 Sui Testnet**
+   ```bash
+   sui client switch --env testnet
+   ```
+
+2. **部署合約**
+   ```bash
+   cd move
+   sui client publish --gas-budget 100000000
+   ```
+
+3. **更新合約 ID**
+
+   將部署輸出的 `PACKAGE_ID` 和 `ParkingLot` 的 Object ID 填入 `frontend/src/constants/ids.ts`。
 
 ## 環境變數設定
 
-專案依賴環境變數來運行。請在專案根目錄下建立 `.env` 文件（可參考 `.env.example` 若存在）。
+在 `frontend/` 目錄下建立 `.env.local`：
+
+```bash
+VITE_SUI_NETWORK=testnet
+```
 
 根據 `.gitignore` 的設定，支援以下環境變數文件：
 - `.env` (預設)
@@ -123,30 +145,18 @@
 
 ## 操作說明
 
-由於 `package.json` 中的腳本配置可能因開發階段而異，請查看 `package.json` 中的 `"scripts"` 區塊以獲取確切指令。一般常見指令如下：
-
 - **啟動開發伺服器**：
   ```bash
-  npm run dev
-  # 或
-  npm start
+  cd frontend && npm run dev
   ```
 
 - **建置生產版本**：
   ```bash
-  npm run build
+  cd frontend && npm run build
   ```
-
-## 測試
-
-若要執行測試並查看程式碼覆蓋率（Coverage），請執行：
-
-```bash
-npm test
-```
 
 ## 技術棧
 
-- **@iota/sdk**: IOTA 核心 SDK，用於與節點互動。
-- **@iota/dapp-kit**: 用於構建 dApp 前端並整合錢包功能。
-- **@mysten/bcs**: 用於處理 Move 語言相關的數據序列化。
+- **@mysten/sui**: Sui 核心 SDK，用於與節點互動及建構交易。
+- **@mysten/dapp-kit**: 用於構建 dApp 前端並整合 Sui 錢包功能。
+- **Move (Sui)**: 智能合約語言，合約部署於 Sui Testnet。
