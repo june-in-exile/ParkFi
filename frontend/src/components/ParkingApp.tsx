@@ -16,13 +16,13 @@ export default function ParkingApp() {
       <div className="app-container">
         <header className="app-header">
           <div className="header-brand">
-            <h1>🅿️ Park<span className="accent">Fi</span></h1>
+            <img src="/logo.png" alt="ParkFi Logo" className="header-logo" />
             <span className="subtitle">停車格資產化平台 · Powered by Sui</span>
           </div>
         </header>
         <div className="connect-screen">
           <div className="connect-card">
-            <span className="logo">🅿️</span>
+            <img src="/logo.png" alt="ParkFi Logo" className="logo" />
             <h2>歡迎使用 ParkFi</h2>
             <p>連接您的 Sui 錢包，開始投資停車格資產並獲取被動收益</p>
             <WalletConnect />
@@ -36,7 +36,7 @@ export default function ParkingApp() {
     <div className="app-container">
       <header className="app-header">
         <div className="header-brand">
-          <h1>🅿️ Park<span className="accent">Fi</span></h1>
+          <img src="/logo.png" alt="ParkFi Logo" className="header-logo" />
           <span className="subtitle">停車格資產化平台 · Powered by Sui</span>
         </div>
         <WalletConnect />
